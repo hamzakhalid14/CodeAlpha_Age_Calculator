@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>calculator</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+    .input{
+        margin: 10px;
+        width: 400px;
+    }
+    button{
+        margin: 10px;
+    }
+    .calculate{
+        margin: 10px;
+    }
+    .all{
+        background-color: #FFF2D7;
+        width:1000px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 10px;
+        font-size: x-large;
+        font-weight: bold;
+    }
+    .all > button{
+        background-color: #FFC300;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: x-large;
+        font-weight: bold;
+    }
+    .all > button:hover{
+        background-color: #FF5733;
+    }
+
+</style>
+<body>
+    <div class="all">
+    <label for="day"> day:</label>
+  <input type="number" id="day" name="day" class=" input form-control" >
+  <label for="day"> month:</label>
+  <input type="number" id="month" name="month" class=" input form-control">
+  <label for="day"> year:</label>
+  <input type="number" id="year" name="year" class="input form-control"> 
+    <button onclick="calculate()">calculate</button>
+    <div class="calculate"></div>
+</div>
+    <script>
+        const day = document.getElementById('day');
+        const month = document.getElementById('month');
+        const year = document.getElementById('year');
+        const calculate = () => {
+            const date = new Date();
+            const currentYear = date.getFullYear();
+            const currentMonth = date.getMonth() + 1;
+            const currentDay = date.getDate();
+            const birthYear = year.value;
+            const birthMonth = month.value;
+            const birthDay = day.value;
+            if (birthYear > currentYear || (birthYear === currentYear && birthMonth > currentMonth) || (birthYear === currentYear && birthMonth === currentMonth && birthDay > currentDay )) {
+                document.querySelector('.calculate').innerHTML = `invalid date`;
+                return;
+            }
+            else {
+                 let age = currentYear - birthYear;
+            if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
+                age--;
+            }
+            document.querySelector('.calculate').innerHTML = `your age is ${age}`;
+            }
+           
+        }
+    </script>
+</body>
+</html>
